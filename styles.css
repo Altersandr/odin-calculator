@@ -1,4 +1,7 @@
+
+
 body{
+    font-family: sans-serif;
     background-color: #ff7300;
     display: flex;
     justify-content: center;
@@ -8,7 +11,7 @@ body{
 #calcBody{
     min-height: 44vh;
     min-width: 260px;
-    background-color: #001e33;
+    background-color: #003c66;
     margin-top: 250px;
     flex-direction: row;
     border-radius: 25px;
@@ -18,20 +21,26 @@ body{
     align-items: center;
     row-gap: 15px;
     box-shadow: 10px 10px 10px;
+    border: #e6f4ff 1px solid;
 }
 
 #display{
+    overflow: hidden;
     min-height: 70px;
     min-width: 214px;
+    max-width: 214px;
+    max-height: 70px;
     flex-wrap: nowrap;
     flex-grow: 0;
     margin-top: 20px;
     border-radius: 10px;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 #row1 #clear,
 #row1 #CE{
     font-size: 18px;
+    
 }
 
 #rows button{
@@ -72,23 +81,38 @@ body{
 }
 
 #displayValue{
+    overflow: hidden;
     padding-top: 20px;
 }
 
 #clear{
+    
     border: #99d5ff;
-    transition: 0.2s;
+    transition: 0.1s;
 }
 
 #clear:hover{
     border: #ff7300 2px solid;
+    font-size: 28px;
+    font-weight: 900;
 }
 
 button{
-    border: #99d5ff;
-    transition: 0.2s;
+    border: #99d5ff 2px solid;
+    transition: 0.1s;
 }
 
 button:hover{
     border: #ff7300 2px solid;
+}
+
+#rows .operand{
+    border: none;
+    background-color: #ff9d4d;
+    transition: 0.1s;
+    color: white
+}
+
+#rows .operand:hover{
+    border: #99d5ff 2px solid;
 }
