@@ -28,52 +28,54 @@ const operate = function(a, b, operation){
 };
 
 
-
-
-
-
-
-//
-let firstDigit;
-let secondDigit;
-let operationToPerform;
-
-
+let firstDigit = '';
+let secondDigit = '';
+let operationToPerform = '';
 
 
 const storeOperation = function (){
-    firstDigit = display.innerText
-    display.innerText += this.innerText
-    operationToPerform = this.innerText
+    if(firstDigit!='' && operationToPerform!=''){
+        secondDigit = storedValue;
+        storedValue = '';
+        firstDigit = Math.round(operate(firstDigit, secondDigit, operationToPerform)*100)/100;
+        operationToPerform = this.innerText;
+        display.innerText += operationToPerform;
 
-    if(operationToPerform !='' && secondDigit !=''){
-    display.innerText = operate(firstDigit, secondDigit, operationToPerform)
-    firstDigit = display.innerText
+    }else{
+    firstDigit = storedValue;
+    storedValue = '';
+    operationToPerform = this.innerText;
+    display.innerText += operationToPerform;
     }
-    
-    console.log(operationToPerform)
-
 };
 
 
-
-const display = document.getElementById('display');
+const display = document.getElementById('displayValue');
 const clear = document.getElementById('clear');
 
 clear.addEventListener('click', clearDisplay);
 
 function clearDisplay() {
     display.innerText = 0;
-    firstDigit = 0;
-    secondDigit = 0;
+    firstDigit = '';
+    secondDigit = '';
     operationToPerform = '';
+    storedValue = '';
 };
 
 
 
+const erase = document.getElementById('CE');
+erase.addEventListener('click',()=>{
+    display.innerText = display.innerText.slice(0, -1)
+    storedValue = storedValue.slice(0, -1)
+
+})
 
 const digits = document.querySelectorAll('.digit');
+
 digits.forEach(digits=>digits.addEventListener('click', print));
+
 
 const operands = document.querySelectorAll('.operand');
 operands.forEach(operand=>operand.addEventListener('click', storeOperation));
@@ -81,25 +83,24 @@ operands.forEach(operand=>operand.addEventListener('click', storeOperation));
 const equal = document.querySelector('.equal');
 
 equal.addEventListener('click', ()=>{
-    let secondDigitIndex = display.innerText.indexOf(operationToPerform);
-    secondDigit = display.innerText.substring(secondDigitIndex+1)
-    console.log(firstDigit)
-    display.innerText = operate(firstDigit, secondDigit, operationToPerform)
-    firstDigit = display.innerText
+    secondDigit = storedValue
+    display.innerText = Math.round(operate(firstDigit, secondDigit, operationToPerform)*100)/100;
+    equalize()
 });
 
 
+let storedValue = '';
+
 function print() {
+    
+    storedValue += this.innerText;
     display.innerText += this.innerText;
-    console.log(this.innerText)
 };
 
+function equalize(){
+    firstDigit = display.innerText;
+    operationToPerform = '';
+    storedValue = firstDigit;
+    secondDigit = '';
 
-
-//when i type the second operand a few things have to happen
-
-//check if there is already an operand
-//if yes, call operate function passing the first, second, operand values 
-//update the first digit value with the result from last step
-//(on the display as well), replace the operand with the new value,
-//wait for the second digit.
+}
