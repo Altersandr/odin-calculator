@@ -32,7 +32,6 @@ let secondDigit = '';
 let operationToPerform = '';
 let storedValue = '';
 
-
 const storeOperation = function (){
     dot.disabled = false;
     if(firstDigit!='' && operationToPerform!=''){
@@ -130,6 +129,9 @@ window.addEventListener('keydown', function (e){
    }
    else if(e.key === '/' ||e.key === '*' ||e.key === '-' ||e.key === '+'){
     dot.disabled = false;
+    if(storedValue.includes(e.key)){
+        return
+    }
         if(firstDigit!='' && operationToPerform!=''){
             secondDigit = storedValue;
             storedValue = '';
@@ -146,6 +148,9 @@ window.addEventListener('keydown', function (e){
                 }
     else if(e.key ==='0' ||e.key ==='1' || e.key ==='2' || e.key ==='3' || e.key ==='4' ||
     e.key ==='5' || e.key ==='6' || e.key ==='7' || e.key ==='8' || e.key ==='9' || e.key ==='.'){
+        if(e.key ==='.' && storedValue.includes('.')){
+            return
+        }
         display.style.color = '#001e33';
         storedValue += e.key;
         if(display.innerText == '0' && event.key != '.'){
